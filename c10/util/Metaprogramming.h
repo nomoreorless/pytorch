@@ -1,6 +1,5 @@
 #pragma once
 
-#include <c10/util/Array.h>
 #include <c10/util/TypeList.h>
 #include <array>
 #include <functional>
@@ -192,11 +191,11 @@ struct filter_map_ {
       class Mapper,
       class... Args,
       size_t... INDEX>
-  static guts::array<ResultType, num_results> call(
+  static std::array<ResultType, num_results> call(
       const Mapper& mapper,
       std::index_sequence<INDEX...>,
       Args&&... args) {
-    return guts::array<ResultType, num_results>{
+    return std::array<ResultType, num_results>{
         mapper(extract_arg_by_filtered_index<Condition, INDEX>(
             std::forward<Args>(args)...))...};
   }
@@ -209,11 +208,11 @@ struct filter_map_<ResultType, 0> {
       class Mapper,
       class... Args,
       size_t... INDEX>
-  static guts::array<ResultType, 0> call(
+  static std::array<ResultType, 0> call(
       const Mapper& /*mapper*/,
       std::index_sequence<INDEX...>,
       Args&&... /*args*/) {
-    return guts::array<ResultType, 0>{};
+    return std::array<ResultType, 0>{};
   }
 };
 } // namespace detail

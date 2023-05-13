@@ -2,7 +2,6 @@
 
 #include <c10/macros/Macros.h>
 #include <c10/util/C++17.h>
-#include <c10/util/reverse_iterator.h>
 #include <algorithm>
 #include <cstring>
 #include <limits>
@@ -31,7 +30,7 @@ class basic_string_view final {
   using const_reference = const CharT&;
   using const_iterator = const CharT*;
   using iterator = const_iterator;
-  using const_reverse_iterator = c10::reverse_iterator<const_iterator>;
+  using const_reverse_iterator = std::reverse_iterator<const_iterator>;
   using reverse_iterator = const_reverse_iterator;
   using size_type = std::size_t;
   using difference_type = std::ptrdiff_t;
